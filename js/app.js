@@ -952,20 +952,18 @@ const ADMIN_SEQ = ['a', 'b', 'l', 'e', 'n', 's'];  // 비밀 코드: ablens
 let _adminBuf = [];
 
 document.addEventListener('keydown', e => {
+  // 입력 필드에 포커스 중이면 무시
+  const tag = document.activeElement.tagName;
+  if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
   _adminBuf.push(e.key.toLowerCase());
   if (_adminBuf.length > ADMIN_SEQ.length) _adminBuf.shift();
 
   if (_adminBuf.join('') === ADMIN_SEQ.join('')) {
     _adminBuf = [];
-    if (!isPro()) {
-      localStorage.setItem(PRO_KEY, '1');
-      updateTrialUI();
-      // 살짝 반짝이는 피드백
-      document.body.style.transition = 'background .3s';
-      document.body.style.background = '#0d1f0d';
-      setTimeout(() => { document.body.style.background = ''; }, 600);
-      console.info('✦ 어드민 모드 활성화');
-    }
+    localStorage.setItem(PRO_KEY, '1');
+    updateTrialUI();
+    alert('✦ 어드민 모드 활성화! 무제한으로 사용하세요.');
   }
 });
 
