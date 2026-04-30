@@ -952,11 +952,9 @@ let _adminTapCount = 0;
 let _adminTapTimer = null;
 
 function handleAdminTap() {
-  if (isPro()) return;
-
   _adminTapCount++;
   clearTimeout(_adminTapTimer);
-  _adminTapTimer = setTimeout(() => { _adminTapCount = 0; }, 3000); // 3초 내에 5번
+  _adminTapTimer = setTimeout(() => { _adminTapCount = 0; }, 3000);
 
   if (_adminTapCount >= 5) {
     _adminTapCount = 0;
