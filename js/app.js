@@ -948,20 +948,18 @@ document.addEventListener('keydown', e => {
    업그레이드 버튼 5번 클릭 → 무제한 활성화
    TODO: 나중에 Firebase Auth로 교체할 것
 ═══════════════════════════════════════ */
-let _upgradeTapCount = 0;
-let _upgradeTapTimer = null;
+let _adminTapCount = 0;
+let _adminTapTimer = null;
 
-function handleUpgradeClick(e) {
-  if (isPro()) return; // 이미 프로면 그냥 링크 이동
+function handleAdminTap() {
+  if (isPro()) return;
 
-  e.preventDefault(); // 링크 이동 막기
-  _upgradeTapCount++;
+  _adminTapCount++;
+  clearTimeout(_adminTapTimer);
+  _adminTapTimer = setTimeout(() => { _adminTapCount = 0; }, 3000); // 3초 내에 5번
 
-  clearTimeout(_upgradeTapTimer);
-  _upgradeTapTimer = setTimeout(() => { _upgradeTapCount = 0; }, 3000); // 3초 내에 5번
-
-  if (_upgradeTapCount >= 5) {
-    _upgradeTapCount = 0;
+  if (_adminTapCount >= 5) {
+    _adminTapCount = 0;
     localStorage.setItem(PRO_KEY, '1');
     updateTrialUI();
     alert('✦ 무제한 모드 활성화!');

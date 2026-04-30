@@ -20,7 +20,7 @@
     <div class="trial-pips" id="trialPips"></div>
     <span class="trial-count">무료 <span id="trialLeft">3</span>회 남음</span>
   </div>
-  <a href="index.html#pricing" class="btn-upgrade" id="btnUpgradeNav" onclick="handleUpgradeClick(event)">업그레이드</a>
+  <a href="index.html#pricing" class="btn-upgrade" id="btnUpgradeNav">업그레이드</a>
 </nav>
 
 <!-- ── 결제 게이트 모달 ── -->
@@ -65,7 +65,7 @@
 
   <!-- ── HEADER ── -->
   <div class="header">
-    <div class="badge">🔬 A/B TEST SIMULATION</div>
+    <div class="badge" id="adminBadge" onclick="handleAdminTap()">🔬 A/B TEST SIMULATION</div>
     <h1>UI A/B 테스트 시뮬레이션</h1>
     <p class="sub">디자인 이미지를 업로드하고, 비교할 영역을 드래그로 선택하세요</p>
   </div>
