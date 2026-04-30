@@ -943,3 +943,29 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closePaywall();
 });
 
+/* ═══════════════════════════════════════
+   어드민 비밀 코드
+   TODO: 나중에 Firebase Auth로 교체할 것
+   → isPro() 를 Firebase uid 체크로 대체
+═══════════════════════════════════════ */
+const ADMIN_SEQ = ['a', 'b', 'l', 'e', 'n', 's'];  // 비밀 코드: ablens
+let _adminBuf = [];
+
+document.addEventListener('keydown', e => {
+  _adminBuf.push(e.key.toLowerCase());
+  if (_adminBuf.length > ADMIN_SEQ.length) _adminBuf.shift();
+
+  if (_adminBuf.join('') === ADMIN_SEQ.join('')) {
+    _adminBuf = [];
+    if (!isPro()) {
+      localStorage.setItem(PRO_KEY, '1');
+      updateTrialUI();
+      // 살짝 반짝이는 피드백
+      document.body.style.transition = 'background .3s';
+      document.body.style.background = '#0d1f0d';
+      setTimeout(() => { document.body.style.background = ''; }, 600);
+      console.info('✦ 어드민 모드 활성화');
+    }
+  }
+});
+
