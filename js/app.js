@@ -944,26 +944,27 @@ document.addEventListener('keydown', e => {
 });
 
 /* ═══════════════════════════════════════
-   어드민 비밀 코드
+   어드민 숨김 트리거
+   업그레이드 버튼 5번 클릭 → 무제한 활성화
    TODO: 나중에 Firebase Auth로 교체할 것
-   → isPro() 를 Firebase uid 체크로 대체
 ═══════════════════════════════════════ */
-const ADMIN_SEQ = ['a', 'b', 'l', 'e', 'n', 's'];  // 비밀 코드: ablens
-let _adminBuf = [];
+let _upgradeTapCount = 0;
+let _upgradeTapTimer = null;
 
-document.addEventListener('keydown', e => {
-  // 입력 필드에 포커스 중이면 무시
-  const tag = document.activeElement.tagName;
-  if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+function handleUpgradeClick(e) {
+  if (isPro()) return; // 이미 프로면 그냥 링크 이동
 
-  _adminBuf.push(e.key.toLowerCase());
-  if (_adminBuf.length > ADMIN_SEQ.length) _adminBuf.shift();
+  e.preventDefault(); // 링크 이동 막기
+  _upgradeTapCount++;
 
-  if (_adminBuf.join('') === ADMIN_SEQ.join('')) {
-    _adminBuf = [];
+  clearTimeout(_upgradeTapTimer);
+  _upgradeTapTimer = setTimeout(() => { _upgradeTapCount = 0; }, 3000); // 3초 내에 5번
+
+  if (_upgradeTapCount >= 5) {
+    _upgradeTapCount = 0;
     localStorage.setItem(PRO_KEY, '1');
     updateTrialUI();
-    alert('✦ 어드민 모드 활성화! 무제한으로 사용하세요.');
+    alert('✦ 무제한 모드 활성화!');
   }
-});
+}
 
