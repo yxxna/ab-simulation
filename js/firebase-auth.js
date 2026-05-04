@@ -35,6 +35,9 @@ function updateNavAuth(user) {
 
     if (user.email === ADMIN_EMAIL) {
       localStorage.setItem('recto_pro', '1');
+    } else {
+      // 어드민 아닌 계정 로그인 시 PRO 강제 해제
+      localStorage.removeItem('recto_pro');
     }
   } else {
     btnLogin.style.display = 'flex';

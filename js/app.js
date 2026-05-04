@@ -847,7 +847,11 @@ function getUsedCount() {
 function incrementUsed() {
   localStorage.setItem(STORAGE_KEY, getUsedCount() + 1);
 }
+const ADMIN_EMAIL = 'yxxna.design@gmail.com';
 function isPro() {
+  // 어드민 이메일로 로그인된 경우 항상 PRO
+  if (window.currentUser && window.currentUser.email === ADMIN_EMAIL) return true;
+  // 결제 완료된 경우 (추후 토스페이먼츠 연동)
   return localStorage.getItem(PRO_KEY) === '1';
 }
 
