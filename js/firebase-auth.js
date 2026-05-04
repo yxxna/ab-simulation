@@ -32,15 +32,7 @@ function updateNavAuth(user) {
     userAvatar.src         = user.photoURL || '';
     userName.textContent   = user.displayName || user.email;
 
-    if (user.email === ADMIN_EMAIL) {
-      localStorage.setItem('recto_pro', '1');
-    } else {
-      // 어드민 아닌 계정 로그인 시 PRO 강제 해제
-      localStorage.removeItem('recto_pro');
-    }
   } else {
-    // 로그아웃 상태 — PRO 키 초기화
-    localStorage.removeItem('recto_pro');
     btnLogin.style.display = 'flex';
     userInfo.style.display = 'none';
   }
