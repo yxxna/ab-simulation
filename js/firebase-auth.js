@@ -44,26 +44,24 @@ function updateNavAuth(user) {
   if (typeof updateTrialUI === 'function') updateTrialUI();
 }
 
-/* ── Google 로그인 ── */
+/* ── Google 로그인 (popup 방식) ── */
 function signInWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithRedirect(provider);
+  auth.signInWithPopup(provider)
+    .then(result => {
+      window.currentUser = result.user;
+      updateNavAuth(result.user);
+    })
+    .catch(err => console.error('로그인 실패:', err.code, err.message));
 }
 
 /* ── 로그아웃 ── */
 function signOut() {
-  auth.signOut().then(() => updateNavAuth(null));
+  auth.signOut().then(() => {
+    window.currentUser = null;
+    updateNavAuth(null);
+  });
 }
-
-/* ── 리디렉션 결과 처리 ── */
-auth.getRedirectResult()
-  .then(result => {
-    if (result && result.user) {
-      window.currentUser = result.user;
-      updateNavAuth(result.user);
-    }
-  })
-  .catch(err => console.error('redirect 오류:', err.code, err.message));
 
 /* ── 인증 상태 상시 감지 (새로고침·재방문 때도 유지) ── */
 auth.onAuthStateChanged(user => {
