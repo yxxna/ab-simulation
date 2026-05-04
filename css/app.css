@@ -46,6 +46,27 @@ body {
   text-decoration: none;
 }
 .btn-upgrade:hover { opacity: .85; }
+
+.nav-right { display: flex; align-items: center; gap: 8px; }
+
+.btn-google-login {
+  display: flex; align-items: center; gap: 6px;
+  background: #fff; color: #333; border: none; font-family: inherit;
+  font-size: 12px; font-weight: 600; padding: 6px 12px;
+  border-radius: 8px; cursor: pointer; transition: opacity .15s;
+}
+.btn-google-login:hover { opacity: .85; }
+
+.user-info { display: flex; align-items: center; gap: 8px; }
+.user-avatar { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; }
+.user-name { font-size: 12px; color: #aaa; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.btn-logout {
+  background: transparent; border: 1px solid #333; color: #555;
+  font-family: inherit; font-size: 11px; padding: 4px 10px;
+  border-radius: 6px; cursor: pointer; transition: all .15s;
+}
+.btn-logout:hover { border-color: #ff3b30; color: #ff3b30; }
+
 .pro-badge-nav {
   background: rgba(0,114,245,.15); border: 1px solid rgba(0,114,245,.3);
   color: #5aabff; font-size: 11px; font-weight: 700;
