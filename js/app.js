@@ -165,7 +165,8 @@ async function runAiAnalysis() {
   $('btnAiAnalyze').disabled   = true;
 
   try {
-    const res = await fetch('/api/analyze', {
+    const API_URL = 'https://ab-simulation-yxxnas-projects.vercel.app/api/analyze';
+    const res = await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
