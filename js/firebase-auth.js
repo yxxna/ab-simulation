@@ -16,7 +16,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
-const ADMIN_EMAIL = 'yxxna.design@gmail.com';
 window.currentUser = null;
 
 /* ── nav UI 업데이트 ── */
