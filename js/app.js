@@ -838,8 +838,8 @@ function updateClProgress() {}
    무료 체험 카운터 & 결제 게이트
 ═══════════════════════════════════════ */
 const FREE_LIMIT  = 3;
-const STORAGE_KEY = 'ablens_used';
-const PRO_KEY     = 'ablens_pro';
+const STORAGE_KEY = 'recto_used';
+const PRO_KEY     = 'recto_pro';
 
 function getUsedCount() {
   return parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);

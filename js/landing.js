@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════
-   AB Lens — Landing Page Script
+   Recto — Landing Page Script
    js/landing.js
 ════════════════════════════════════════ */
 
