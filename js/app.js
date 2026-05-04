@@ -952,19 +952,5 @@ document.addEventListener('keydown', e => {
    업그레이드 버튼 5번 클릭 → 무제한 활성화
    TODO: 나중에 Firebase Auth로 교체할 것
 ═══════════════════════════════════════ */
-let _adminTapCount = 0;
-let _adminTapTimer = null;
-
-function handleAdminTap() {
-  _adminTapCount++;
-  clearTimeout(_adminTapTimer);
-  _adminTapTimer = setTimeout(() => { _adminTapCount = 0; }, 3000);
-
-  if (_adminTapCount >= 5) {
-    _adminTapCount = 0;
-    localStorage.setItem(PRO_KEY, '1');
-    updateTrialUI();
-    alert('✦ 무제한 모드 활성화!');
-  }
-}
+function handleAdminTap() { /* Firebase Auth로 대체됨 */ }
 

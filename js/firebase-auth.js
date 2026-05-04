@@ -40,6 +40,8 @@ function updateNavAuth(user) {
       localStorage.removeItem('recto_pro');
     }
   } else {
+    // 로그아웃 상태 — PRO 키 초기화
+    localStorage.removeItem('recto_pro');
     btnLogin.style.display = 'flex';
     userInfo.style.display = 'none';
   }
