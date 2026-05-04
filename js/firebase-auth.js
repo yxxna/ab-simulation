@@ -22,13 +22,20 @@ const ADMIN_EMAIL = 'yxxna.design@gmail.com';
 // 현재 로그인 유저 (전역)
 window.currentUser = null;
 
-/* ── Google 로그인 ── */
+/* ── Google 로그인 (redirect 방식 — GitHub Pages 호환) ── */
 function signInWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider).catch(err => {
-    console.error('로그인 실패:', err.message);
-  });
+  auth.signInWithRedirect(provider);
 }
+
+// 리디렉션 후 결과 처리
+auth.getRedirectResult().then(result => {
+  if (result.user) {
+    console.log('Google 로그인 성공:', result.user.email);
+  }
+}).catch(err => {
+  console.error('로그인 실패:', err.code, err.message);
+});
 
 /* ── 로그아웃 ── */
 function signOut() {
