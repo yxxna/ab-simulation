@@ -858,29 +858,33 @@ function isPro() {
 
 // ── 트라이얼 UI 업데이트 ──
 function updateTrialUI() {
+  const badge  = $('trialBadge');
+  const btn    = $('btnUpgradeNav');
+
   if (isPro()) {
-    // 프로 상태: 배지 변경, 업그레이드 버튼 숨김
-    $('trialBadge').innerHTML = '<span class="pro-badge-nav">PRO ✦ 무제한</span>';
-    $('btnUpgradeNav').style.display = 'none';
+    badge.innerHTML          = '<span class="pro-badge-nav">PRO ✦ 무제한</span>';
+    btn.style.display        = 'none';
     return;
   }
+
+  // PRO 아닌 경우 — 항상 전체 재렌더
   const used = getUsedCount();
   const left = Math.max(0, FREE_LIMIT - used);
-  $('trialLeft').textContent = left;
 
-  // pip 업데이트
-  const pips = $('trialPips');
-  pips.innerHTML = '';
+  let pipsHtml = '';
   for (let i = 0; i < FREE_LIMIT; i++) {
-    const pip = document.createElement('div');
-    pip.className = 'trial-pip' + (i < used ? ' used' : '');
-    pips.appendChild(pip);
+    pipsHtml += `<div class="trial-pip${i < used ? ' used' : ''}"></div>`;
   }
+  badge.innerHTML = `
+    <div class="trial-pips">${pipsHtml}</div>
+    <span class="trial-count">무료 <span>${left}</span>회 남음</span>
+  `;
 
-  // 0회 남으면 업그레이드 버튼 강조
-  const btn = $('btnUpgradeNav');
+  btn.style.display    = '';
+  btn.textContent      = '업그레이드';
+  btn.style.background = '';
   if (left === 0) {
-    btn.textContent = '🔒 업그레이드';
+    btn.textContent      = '🔒 업그레이드';
     btn.style.background = 'linear-gradient(135deg,#ff6b35,#ff9500)';
   }
 }
