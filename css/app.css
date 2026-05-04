@@ -395,3 +395,48 @@ select.n-sel option { background: #181921; }
 .paywall-features span::before { content: '✓'; color: #30d158; font-weight: 700; }
 .paywall-dismiss { font-size: 12px; color: #333; cursor: pointer; background: none; border: none; font-family: inherit; transition: color .15s; }
 .paywall-dismiss:hover { color: #666; }
+
+/* ── Claude AI 분석 ── */
+.ai-analysis-wrap { margin-top: 24px; }
+.btn-ai-analyze {
+  width: 100%; padding: 14px; border-radius: 14px; border: 1px solid rgba(0,114,245,.3);
+  background: rgba(0,114,245,.08); color: #5aabff; font-family: inherit;
+  font-size: 15px; font-weight: 700; cursor: pointer; transition: all .18s; letter-spacing: -.3px;
+}
+.btn-ai-analyze:hover:not(:disabled) { background: rgba(0,114,245,.16); border-color: #5aabff; }
+.btn-ai-analyze:disabled { opacity: .35; cursor: not-allowed; }
+
+.ai-loading { display: flex; align-items: center; gap: 10px; justify-content: center;
+  padding: 24px; color: #555; font-size: 14px; }
+.ai-loading-spinner {
+  width: 18px; height: 18px; border: 2px solid #333; border-top-color: #5aabff;
+  border-radius: 50%; animation: spin .7s linear infinite; display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.ai-result { background: #181921; border: 1px solid #252630; border-radius: 20px; padding: 24px; margin-top: 16px; }
+.ai-result-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.ai-result-title { font-size: 14px; font-weight: 700; color: #aaa; }
+.ai-winner { font-size: 15px; font-weight: 900; color: #30d158; }
+.ai-reason { font-size: 14px; color: #777; margin-bottom: 20px; line-height: 1.6; }
+
+.ai-scores { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.ai-score-card { background: #0d0e13; border: 1px solid #1e1f28; border-radius: 14px; padding: 16px; }
+.ai-score-tag { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; margin-bottom: 12px; display: inline-block; }
+.ai-score-tag-a { background: rgba(255,149,0,.14); color: #ff9500; }
+.ai-score-tag-b { background: rgba(0,114,245,.14); color: #5aabff; }
+.ai-score-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.ai-score-lbl { font-size: 12px; color: #555; }
+.ai-score-bar-wrap { flex: 1; margin: 0 10px; height: 4px; background: #252630; border-radius: 2px; overflow: hidden; }
+.ai-score-bar { height: 100%; border-radius: 2px; transition: width .6s ease; }
+.ai-score-bar-a { background: #ff9500; }
+.ai-score-bar-b { background: #5aabff; }
+.ai-score-num { font-size: 12px; font-weight: 700; color: #aaa; width: 28px; text-align: right; }
+
+.ai-feedbacks { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.ai-feedback { background: #0d0e13; border: 1px solid #1e1f28; border-radius: 12px; padding: 14px; font-size: 13px; color: #666; line-height: 1.6; }
+.ai-feedback strong { color: #aaa; display: block; margin-bottom: 4px; }
+
+.ai-tip { background: rgba(48,209,88,.06); border: 1px solid rgba(48,209,88,.18);
+  border-radius: 12px; padding: 14px 16px; font-size: 13px; color: #30d158; line-height: 1.6; }
+.ai-tip::before { content: '💡 '; }

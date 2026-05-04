@@ -136,8 +136,89 @@ function drawSelRect(s, x, y, w, h) {
 
 function checkReady() {
   const ready = ST.img.A && ST.img.B && ST.sel.A && ST.sel.B;
-  $('btnRun').disabled  = !ready || ST.sim.running;
-  $('btnReset').disabled = ST.sim.n === 0 && !ST.sim.running;
+  $('btnRun').disabled       = !ready || ST.sim.running;
+  $('btnReset').disabled     = ST.sim.n === 0 && !ST.sim.running;
+  $('btnAiAnalyze').disabled = !ready;
+}
+
+/* ═══════════════════════════════════════
+   Claude AI 분석
+═══════════════════════════════════════ */
+function cropToBase64(imgEl, sel) {
+  const sw = Math.round(imgEl.naturalWidth  * sel.w);
+  const sh = Math.round(imgEl.naturalHeight * sel.h);
+  const cv = document.createElement('canvas');
+  cv.width = sw; cv.height = sh;
+  cv.getContext('2d').drawImage(
+    imgEl,
+    imgEl.naturalWidth * sel.x, imgEl.naturalHeight * sel.y, sw, sh,
+    0, 0, sw, sh
+  );
+  return cv.toDataURL('image/png').split(',')[1];
+}
+
+async function runAiAnalysis() {
+  if (!ST.sel.A || !ST.sel.B) return;
+
+  $('aiResult').style.display  = 'none';
+  $('aiLoading').style.display = 'flex';
+  $('btnAiAnalyze').disabled   = true;
+
+  try {
+    const res = await fetch('/api/analyze', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        imageA: cropToBase64($('imgA'), ST.sel.A),
+        imageB: cropToBase64($('imgB'), ST.sel.B),
+      }),
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    renderAiResult(data);
+  } catch (err) {
+    alert('AI 분석 실패: ' + err.message);
+  } finally {
+    $('aiLoading').style.display = 'none';
+    $('btnAiAnalyze').disabled   = false;
+  }
+}
+
+function renderAiResult(d) {
+  const LABELS = { contrast:'색상 대비', cta:'CTA 강조', hierarchy:'시각 위계', density:'밀도', polish:'완성도' };
+
+  $('aiWinner').textContent = `🏆 ${d.winner}안 승리`;
+  $('aiReason').textContent = d.reason;
+
+  // 점수 카드
+  let scoresHtml = '';
+  ['A','B'].forEach(s => {
+    const sc = d.scores[s];
+    const tagCls = s === 'A' ? 'ai-score-tag-a' : 'ai-score-tag-b';
+    const barCls = s === 'A' ? 'ai-score-bar-a' : 'ai-score-bar-b';
+    let rows = '';
+    Object.entries(sc).forEach(([k, v]) => {
+      rows += `<div class="ai-score-row">
+        <span class="ai-score-lbl">${LABELS[k]||k}</span>
+        <div class="ai-score-bar-wrap"><div class="ai-score-bar ${barCls}" style="width:${v}%"></div></div>
+        <span class="ai-score-num">${v}</span>
+      </div>`;
+    });
+    scoresHtml += `<div class="ai-score-card">
+      <span class="ai-score-tag ${tagCls}">${s}안</span>${rows}
+    </div>`;
+  });
+  $('aiScores').innerHTML = scoresHtml;
+
+  // 피드백
+  $('aiFeedbacks').innerHTML = ['A','B'].map(s => `
+    <div class="ai-feedback"><strong>${s}안</strong>${d.feedback[s]}</div>
+  `).join('');
+
+  // 팁
+  $('aiTip').textContent = d.tip;
+
+  $('aiResult').style.display = 'block';
 }
 
 /* ── CTR 예측 (픽셀 분석 기반) ── */

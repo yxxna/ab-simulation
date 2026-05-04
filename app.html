@@ -385,6 +385,26 @@
     <div id="factorGroupsWrap"></div>
   </div>
 
+  <!-- ── Claude AI 분석 ── -->
+  <div class="ai-analysis-wrap" id="aiAnalysisWrap">
+    <button class="btn-ai-analyze" id="btnAiAnalyze" onclick="runAiAnalysis()" disabled>
+      🤖 Claude AI 분석
+    </button>
+    <div class="ai-result" id="aiResult" style="display:none">
+      <div class="ai-result-head">
+        <span class="ai-result-title">🤖 Claude AI 분석 결과</span>
+        <span class="ai-winner" id="aiWinner"></span>
+      </div>
+      <p class="ai-reason" id="aiReason"></p>
+      <div class="ai-scores" id="aiScores"></div>
+      <div class="ai-feedbacks" id="aiFeedbacks"></div>
+      <div class="ai-tip" id="aiTip"></div>
+    </div>
+    <div class="ai-loading" id="aiLoading" style="display:none">
+      <span class="ai-loading-spinner"></span> Claude가 분석 중입니다…
+    </div>
+  </div>
+
 </div><!-- /page -->
 
 <script src="js/app.js"></script>
