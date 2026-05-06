@@ -165,7 +165,6 @@ async function runAiAnalysis() {
 
   $('aiResult').style.display  = 'none';
   $('aiLoading').style.display = 'flex';
-  $('btnAiAnalyze').disabled   = true;
 
   try {
     const API_URL = 'https://ab-simulation-yxxnas-projects.vercel.app/api/analyze';
@@ -181,10 +180,11 @@ async function runAiAnalysis() {
     if (data.error) throw new Error(data.error);
     renderAiResult(data);
   } catch (err) {
-    alert('AI 분석 실패: ' + err.message);
+    $('aiLoading').style.display = 'none';
+    $('aiResult').style.display  = 'block';
+    $('aiReason').textContent    = '⚠️ AI 분석 실패: ' + err.message;
   } finally {
     $('aiLoading').style.display = 'none';
-    $('btnAiAnalyze').disabled   = false;
   }
 }
 
