@@ -136,9 +136,12 @@ function drawSelRect(s, x, y, w, h) {
 
 function checkReady() {
   const ready = ST.img.A && ST.img.B && ST.sel.A && ST.sel.B;
-  $('btnRun').disabled       = !ready || ST.sim.running;
-  $('btnReset').disabled     = ST.sim.n === 0 && !ST.sim.running;
-  $('btnAiAnalyze').disabled = !ready;
+  $('btnRun').disabled   = !ready || ST.sim.running;
+  $('btnReset').disabled = ST.sim.n === 0 && !ST.sim.running;
+}
+
+function toggleAccordion(id) {
+  document.getElementById(id).classList.toggle('open');
 }
 
 /* ═══════════════════════════════════════
@@ -430,6 +433,10 @@ function startSim() {
       $('pLbl').textContent = `${total.toLocaleString()}명 시뮬레이션 완료!`;
       showWinner();
       checkReady();
+      // 두 섹션 열기 + AI 분석 자동 시작
+      document.getElementById('simSection').classList.add('open');
+      document.getElementById('aiSection').classList.add('open');
+      runAiAnalysis();
     }
   }, delay);
 }
@@ -445,13 +452,24 @@ function resetAll() {
     $('hdrCtr'+s).textContent = '—';
     $('sImp'+s).textContent = '0';
     $('sClick'+s).textContent = '0';
-    $('ctrLbl'+s).textContent = '—';   // 예측 CTR 라벨 초기화
-    ST.ctr[s] = 0;                      // 예측 CTR 상태 초기화
+    $('ctrLbl'+s).textContent = '—';
+    ST.ctr[s] = 0;
   });
   Object.assign(ST.sim, {
     n:0, aImp:0, aClicks:0, aD:[0,0,0],
     bImp:0, bClicks:0, bD:[0,0,0],
   });
+  // AI 분석 초기화
+  $('aiResult').style.display  = 'none';
+  $('aiLoading').style.display = 'none';
+  $('aiWinner').textContent    = '';
+  $('aiReason').textContent    = '';
+  $('aiScores').innerHTML      = '';
+  $('aiFeedbacks').innerHTML   = '';
+  $('aiTip').textContent       = '';
+  // 섹션 닫기
+  document.getElementById('simSection').classList.remove('open');
+  document.getElementById('aiSection').classList.remove('open');
   checkReady();
 }
 

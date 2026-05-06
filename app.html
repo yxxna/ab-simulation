@@ -288,6 +288,17 @@
     <button class="btn-reset" id="btnReset" disabled onclick="resetAll()">↺ 전체 초기화</button>
   </div>
 
+  <!-- ══════════════════════════════════════
+       섹션 1 — 시뮬레이션 결과
+  ══════════════════════════════════════ -->
+  <div class="result-accordion" id="simSection">
+    <div class="accordion-header" onclick="toggleAccordion('simSection')">
+      <span class="accordion-icon">📊</span>
+      <span class="accordion-title">시뮬레이션 결과</span>
+      <span class="accordion-arrow" id="simArrow">▼</span>
+    </div>
+    <div class="accordion-body" id="simBody">
+
   <div class="progress-wrap" id="progressWrap">
     <div class="progress-track"><div class="progress-fill" id="pFill"></div></div>
     <div class="progress-lbl" id="pLbl">0명 진행 중...</div>
@@ -373,37 +384,52 @@
     </div>
   </div>
 
-  <!-- ── UI 디자인 분석 ── -->
-  <div class="ui-analysis" id="uiAnalysis">
-    <div class="ua-head">
-      <div>
-        <div class="ua-title">🎨 UI 디자인 요인 분석</div>
-        <div class="ua-sub">업로드된 이미지를 픽셀 단위로 분석해 30가지 디자인 요인을 평가합니다</div>
-      </div>
-    </div>
-    <div id="factorSummaryBar"></div>
-    <div id="factorGroupsWrap"></div>
-  </div>
+  <!-- 섹션 1 닫기 -->
+    </div><!-- /accordion-body -->
+  </div><!-- /simSection -->
 
-  <!-- ── Claude AI 분석 ── -->
-  <div class="ai-analysis-wrap" id="aiAnalysisWrap">
-    <button class="btn-ai-analyze" id="btnAiAnalyze" onclick="runAiAnalysis()" disabled>
-      🤖 Claude AI 분석
-    </button>
-    <div class="ai-result" id="aiResult" style="display:none">
-      <div class="ai-result-head">
-        <span class="ai-result-title">🤖 Claude AI 분석 결과</span>
-        <span class="ai-winner" id="aiWinner"></span>
+  <!-- ══════════════════════════════════════
+       섹션 2 — AI 분석
+  ══════════════════════════════════════ -->
+  <div class="result-accordion" id="aiSection">
+    <div class="accordion-header" onclick="toggleAccordion('aiSection')">
+      <span class="accordion-icon">🤖</span>
+      <span class="accordion-title">AI 분석</span>
+      <span class="accordion-arrow" id="aiArrow">▼</span>
+    </div>
+    <div class="accordion-body" id="aiBody">
+
+      <!-- 픽셀 분석 -->
+      <div class="ui-analysis" id="uiAnalysis">
+        <div class="ua-head">
+          <div>
+            <div class="ua-title">🎨 픽셀 디자인 요인 분석</div>
+            <div class="ua-sub">이미지를 픽셀 단위로 분석해 30가지 디자인 요인을 평가합니다</div>
+          </div>
+        </div>
+        <div id="factorSummaryBar"></div>
+        <div id="factorGroupsWrap"></div>
       </div>
-      <p class="ai-reason" id="aiReason"></p>
-      <div class="ai-scores" id="aiScores"></div>
-      <div class="ai-feedbacks" id="aiFeedbacks"></div>
-      <div class="ai-tip" id="aiTip"></div>
-    </div>
-    <div class="ai-loading" id="aiLoading" style="display:none">
-      <span class="ai-loading-spinner"></span> Claude가 분석 중입니다…
-    </div>
-  </div>
+
+      <!-- Claude AI 분석 -->
+      <div class="ai-analysis-wrap" id="aiAnalysisWrap">
+        <div class="ai-loading" id="aiLoading" style="display:none">
+          <span class="ai-loading-spinner"></span> Claude가 분석 중입니다…
+        </div>
+        <div class="ai-result" id="aiResult" style="display:none">
+          <div class="ai-result-head">
+            <span class="ai-result-title">✦ Claude 분석 결과</span>
+            <span class="ai-winner" id="aiWinner"></span>
+          </div>
+          <p class="ai-reason" id="aiReason"></p>
+          <div class="ai-scores" id="aiScores"></div>
+          <div class="ai-feedbacks" id="aiFeedbacks"></div>
+          <div class="ai-tip" id="aiTip"></div>
+        </div>
+      </div>
+
+    </div><!-- /accordion-body -->
+  </div><!-- /aiSection -->
 
 </div><!-- /page -->
 

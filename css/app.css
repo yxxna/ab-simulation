@@ -440,3 +440,28 @@ select.n-sel option { background: #181921; }
 .ai-tip { background: rgba(48,209,88,.06); border: 1px solid rgba(48,209,88,.18);
   border-radius: 12px; padding: 14px 16px; font-size: 13px; color: #30d158; line-height: 1.6; }
 .ai-tip::before { content: '💡 '; }
+
+/* ── 결과 아코디언 섹션 ── */
+.result-accordion {
+  background: #181921; border: 1px solid #252630;
+  border-radius: 20px; margin-top: 16px; overflow: hidden;
+}
+.accordion-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 18px 20px; cursor: pointer;
+  transition: background .15s; user-select: none;
+}
+.accordion-header:hover { background: rgba(255,255,255,.03); }
+.accordion-icon { font-size: 16px; }
+.accordion-title { font-size: 15px; font-weight: 700; flex: 1; }
+.accordion-arrow { font-size: 11px; color: #444; transition: transform .25s; }
+.result-accordion.open .accordion-arrow { transform: rotate(180deg); }
+.accordion-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height .35s ease, padding .35s ease;
+  padding: 0 20px;
+}
+.result-accordion.open .accordion-body {
+  max-height: 9999px;
+  padding: 0 20px 20px;
+}
