@@ -47,8 +47,8 @@ module.exports = async function handler(req, res) {
       messages: [{
         role: 'user',
         content: [
-          { type: 'image', source: { type: 'base64', media_type: 'image/png', data: imageA } },
-          { type: 'image', source: { type: 'base64', media_type: 'image/png', data: imageB } },
+          { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: imageA } },
+          { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: imageB } },
           { type: 'text', text: prompt },
         ],
       }],

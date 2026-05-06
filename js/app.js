@@ -150,14 +150,21 @@ function toggleAccordion(id) {
 function cropToBase64(imgEl, sel) {
   const sw = Math.round(imgEl.naturalWidth  * sel.w);
   const sh = Math.round(imgEl.naturalHeight * sel.h);
+
+  // 최대 800px로 축소해서 전송 (API 속도 최적화)
+  const MAX = 800;
+  const scale = Math.min(1, MAX / Math.max(sw, sh));
+  const dw = Math.round(sw * scale);
+  const dh = Math.round(sh * scale);
+
   const cv = document.createElement('canvas');
-  cv.width = sw; cv.height = sh;
+  cv.width = dw; cv.height = dh;
   cv.getContext('2d').drawImage(
     imgEl,
     imgEl.naturalWidth * sel.x, imgEl.naturalHeight * sel.y, sw, sh,
-    0, 0, sw, sh
+    0, 0, dw, dh
   );
-  return cv.toDataURL('image/png').split(',')[1];
+  return cv.toDataURL('image/jpeg', 0.85).split(',')[1]; // JPEG로 압축
 }
 
 async function runAiAnalysis() {
