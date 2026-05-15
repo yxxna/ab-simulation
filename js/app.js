@@ -1048,6 +1048,10 @@ function checkPaymentResult() {
     activatePro();
     history.replaceState({}, '', location.pathname);
   }
+  if (location.hash === '#pro') {
+    history.replaceState({}, '', location.pathname);
+    setTimeout(showPaywall, 100);
+  }
 }
 
 // ── 초기화 ──

@@ -212,7 +212,7 @@ h1 .accent { color: var(--blue-light); }
 .testimonial-role { font-size: 11px; color: var(--subtle); }
 
 /* ── PRICING ── */
-.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 860px; margin: 0 auto; }
+.pricing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 640px; margin: 0 auto; }
 @media (max-width: 720px) { .pricing-grid { grid-template-columns: 1fr; max-width: 400px; } }
 .pricing-card { background: var(--surface); border: 1px solid var(--border); border-radius: 22px; padding: 30px 24px; position: relative; }
 .pricing-card.featured { border-color: rgba(0,114,245,.45); background: linear-gradient(160deg, #0d1624, #0a1220); }
